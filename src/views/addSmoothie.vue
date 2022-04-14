@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import router from '@/router';
 import { reactive, ref } from 'vue'
 
 import {appData} from '../stores/data'
@@ -23,9 +24,10 @@ const addNewSmoothie = () => {
         const newSmoothie = {
             title : newSmoothieTitle.value,
             ingredients : allIngredients.value,
-            time : Date.now()
+            id : Date.now()
         }
         smoothiesData.addSmoothie(newSmoothie)
+        router.push({name : 'smoothies'})
     }
     else console.log('feedback')
 }

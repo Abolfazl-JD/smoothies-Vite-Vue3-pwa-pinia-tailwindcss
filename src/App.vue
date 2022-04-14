@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { RouterView, RouterLink } from "vue-router"
+import { appData } from './stores/data'
+const smoothiesData = appData()
+
+onMounted(async () => {
+  await smoothiesData.getSmoothiesData()
+})
 </script>
 
 <template>
