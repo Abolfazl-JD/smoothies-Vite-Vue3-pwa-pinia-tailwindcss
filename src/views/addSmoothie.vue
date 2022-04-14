@@ -62,7 +62,7 @@ const addNewSmoothie = () => {
                 type="text"
                 :name="`ingredient-${index}`"
                 v-model="allIngredients[index]" 
-                class="w-full pt-2 pb-1 text-lg border-b-2 border-solid border-gray-600 outline-none focus:border-teal-700">
+                class="w-full pt-2 pb-1 text-lg border-b-2 border-solid border-gray-600 outline-none focus:border-teal-500">
             </div>
             <div class="mt-7 relative">
                 <label for="newIngredient" class="text-gray-500 text-xs">Add an ingredient: </label>
@@ -72,7 +72,7 @@ const addNewSmoothie = () => {
                 @keyup.enter="addIngredient" 
                 name="newIngredient"
                 v-model="newIngredient" 
-                class="w-full pt-2 pb-1 text-lg border-b-2 border-solid border-gray-600 outline-none focus:border-teal-700">
+                class="w-full pt-2 pb-1 text-lg border-b-2 border-solid border-gray-600 outline-none focus:border-teal-500">
                 <svg
                 @click="addIngredient"
                 xmlns="http://www.w3.org/2000/svg" 

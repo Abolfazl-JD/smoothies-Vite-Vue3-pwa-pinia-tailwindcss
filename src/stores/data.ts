@@ -20,6 +20,17 @@ export const appData = defineStore({
       this.databaseStore.deleteSmoothie(drink)
     },
 
+    editSmoothie(drink: Smoothie) {
+      console.log(drink)
+      let selectedDrink = this.smoothies.find(smooth => smooth.id === drink.id)
+      if (selectedDrink) {
+        selectedDrink.title = drink.title
+        selectedDrink.ingredients = [...drink.ingredients]
+        this.databaseStore.saveData({...selectedDrink})
+      }
+
+    },
+
     async getSmoothiesData() {
       this.smoothies = await this.databaseStore.getSmoothiesStore()
     }

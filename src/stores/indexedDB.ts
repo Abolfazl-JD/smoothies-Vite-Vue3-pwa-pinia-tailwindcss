@@ -59,7 +59,35 @@ export const indexedDb = defineStore({
             }
           }
         })
-      },
+    },
+      
+    async getSingleSmoothie(selectedItemName : string) : Promise<Smoothie | null>{
+      this.database = await this.getDatabase()
+      return new Promise((resolve, reject) => {
+        if (this.database) {
+          const transaction = this.database.transaction('smoothies', 'readonly')
+          const store = transaction.objectStore('smoothies')
+
+          let smoothie : Smoothie | null = null
+          store.openCursor().onsuccess = (event: any) => {
+            const cursor = event.target.result
+            if (cursor) {
+              const drink : Smoothie = cursor.value
+              drink.name === selectedItemName ?
+                smoothie = { ...drink } : 
+                cursor.continue()
+            }
+          }
+
+          transaction.oncomplete = () => {
+            resolve(smoothie)
+          }
+          transaction.onerror = (event) => {
+            reject(event)
+          }
+        }
+      })
+    },
   
       async saveData(drink : Smoothie) {
         this.database = await this.getDatabase()
