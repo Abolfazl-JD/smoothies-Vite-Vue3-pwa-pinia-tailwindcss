@@ -40,8 +40,8 @@ const addNewSmoothie = () => {
 </script>
 
 <template>
-    <div class="shadow shadow-gray-500 w-1/3 py-5 px-3 mt-10 mx-auto">
-        <h2 class="text-blue-800 text-2xl text-center">Add a new smoothie recipe</h2>
+    <div class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 mt-20 mx-auto">
+        <h2 class="text-blue-800 text-2xl text-center font-medium">Add a new smoothie recipe</h2>
         <form class="pt-3">
             <div class="relative">
                 <label for="title" class="text-gray-500 text-xs">Smoothie title:</label>

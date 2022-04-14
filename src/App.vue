@@ -13,7 +13,9 @@ onMounted(async () => {
   <header>
     <div class="wrapper w-full">
       <nav class="bg-blue-600 py-4 px-6 w-full relative">
-        <h1 class="text-white text-3xl">𝕵𝖆𝖑𝖎𝖑 𝓢𝓶𝓸𝓸𝓽𝓱𝓲𝓮𝓼</h1>
+        <router-link :to="{name : 'smoothies'}">
+          <h1 class="text-white text-3xl">𝕵𝖆𝖑𝖎𝖑 𝓢𝓶𝓸𝓸𝓽𝓱𝓲𝓮𝓼</h1>
+        </router-link>
         <router-link :to="{name : 'add-smoothie'}">
           <svg
           xmlns="http://www.w3.org/2000/svg" 
