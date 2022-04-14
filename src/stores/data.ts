@@ -2,23 +2,26 @@ import { defineStore } from "pinia";
 import type { Smoothie } from '../types'
 import {indexedDb} from './indexedDB'
 
-
 export const appData = defineStore({
   id: "smoothiesData",
   state: () => ({
-    smoothies: [] as Smoothie[]
+    smoothies: [] as Smoothie[],
+    databaseStore : indexedDb()
   }),
   getters: {},
   actions: {
     addSmoothie(newDrink : Smoothie) {
       this.smoothies.push(newDrink)
-      const databaseStore = indexedDb()
-      databaseStore.saveData(newDrink)
+      this.databaseStore.saveData(newDrink)
+    },
+
+    removeSmoothie(drink: Smoothie) {
+      this.smoothies = this.smoothies.filter(smoothieItem => smoothieItem.id !== drink.id)
+      this.databaseStore.deleteSmoothie(drink)
     },
 
     async getSmoothiesData() {
-      const databaseStore = indexedDb()
-      this.smoothies = await databaseStore.getSmoothiesStore()
+      this.smoothies = await this.databaseStore.getSmoothiesStore()
     }
   },
 })
