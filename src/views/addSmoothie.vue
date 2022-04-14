@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import router from '@/router';
+import router from '@/router'
 import { onMounted, reactive, ref } from 'vue'
 
 import {appData} from '../stores/data'
@@ -29,7 +29,8 @@ const addNewSmoothie = () => {
         const newSmoothie = {
             title : newSmoothieTitle.value,
             ingredients : allIngredients.value,
-            id : Date.now()
+            id : Date.now(),
+            name : newSmoothieTitle.value.replace(/ /g,'_')
         }
         smoothiesData.addSmoothie(newSmoothie)
         router.push({name : 'smoothies'})

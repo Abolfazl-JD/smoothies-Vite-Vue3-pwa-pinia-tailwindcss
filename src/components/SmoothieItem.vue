@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import type { Smoothie } from '../types'
+import router from '@/router'
+
 import { appData } from '../stores/data'
 const smoothiesData = appData()
 
@@ -28,7 +30,8 @@ const props = defineProps<{
             class="text-xs text-gray-500 rounded-full font-bold bg-gray-300 py-2 px-3">{{ ingredient }}</span>
         </div>
         <!-- Edit icon -->
-        <svg 
+        <svg
+        @click="router.push({name : 'edit-smoothie', params : {id : smoothie.name }})" 
         xmlns="http://www.w3.org/2000/svg" 
         class="h-12 w-12 p-3 text-white bg-pink-600 font-bold rounded-full absolute right-10 cursor-pointer" 
         viewBox="0 0 20 20" 

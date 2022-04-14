@@ -68,9 +68,10 @@ export const indexedDb = defineStore({
             const transaction = this.database.transaction('smoothies', 'readwrite')
             const store = transaction.objectStore('smoothies')
               store.put({
-                  title: drink.title,
-                  id: drink.id,
-                  ingredients : [...drink.ingredients]
+                title: drink.title,
+                id: drink.id,
+                ingredients: [...drink.ingredients],
+                name : drink.name
             })
   
             transaction.oncomplete = () => {

@@ -1,5 +1,6 @@
 export interface Smoothie{
     title: string,
     ingredients: string[],
-    id : number
+    id: number,
+    name : string
 }
