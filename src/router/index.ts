@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import SmoothiesView from "../views/smoothiesView.vue";
+import AddSmoothie from '../views/addSmoothie.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,6 +9,11 @@ const router = createRouter({
       path: "/",
       name: "smoothies",
       component: SmoothiesView,
+    },
+    {
+      path: "/add-smoothie",
+      name: "add-smoothie",
+      component: AddSmoothie,
     },
     // {
     //   path: "/about",

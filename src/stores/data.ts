@@ -1,11 +1,15 @@
 import { defineStore } from "pinia";
-import type {Smoothy} from '../types'
+import type {Smoothie} from '../types'
 
 export const appData = defineStore({
   id: "smoothiesData",
   state: () => ({
-    smoothies: [] as Smoothy[]
+    smoothies: [] as Smoothie[]
   }),
   getters: {},
-  actions: {},
+  actions: {
+    addSmoothie(newDrink : Smoothie) {
+      this.smoothies.push(newDrink)
+    }
+  },
 });
