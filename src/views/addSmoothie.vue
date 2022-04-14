@@ -1,9 +1,14 @@
 <script lang="ts" setup>
 import router from '@/router';
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 import {appData} from '../stores/data'
 const smoothiesData = appData()
+
+const firstInputForm = ref<HTMLInputElement | null>(null)
+onMounted(() => {
+    firstInputForm.value?.focus()
+})
 
 const newSmoothieTitle = ref('')
 const newIngredient = ref('')
@@ -40,7 +45,8 @@ const addNewSmoothie = () => {
         <form class="pt-3">
             <div class="relative">
                 <label for="title" class="text-gray-500 text-xs">Smoothie title:</label>
-                <input 
+                <input
+                ref="firstInputForm" 
                 type="text" 
                 name="title"
                 v-model="newSmoothieTitle" 
