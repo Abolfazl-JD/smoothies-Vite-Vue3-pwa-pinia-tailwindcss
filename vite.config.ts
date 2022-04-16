@@ -19,10 +19,10 @@ export default defineConfig({
         name: "JALIL SMOOTHIES",
         short_name: "SMOOTHIES",
         description: 'vue vite app with new scriptSetup and pinia with tailwindcss using typescript',
-        theme_color: "#ffffff",
+        theme_color: "#db2777",
         start_url: "/",
         display: "standalone",
-        background_color: "#ffffff",
+        background_color: "#fff",
         icons: [
           {
             src: "icon-192.png",
