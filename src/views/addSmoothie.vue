@@ -25,6 +25,12 @@ const addIngredient = () => {
 }
 const addNewSmoothie = () => {
     if(newSmoothieTitle.value){
+    
+        /**
+         * *check if there isn't one smoothie title the same as the new smoothie title
+        */
+
+        checkSmoothieName()
         newIngredient.value ? allIngredients.value.push(newIngredient.value) : null
         const newSmoothie = {
             title : newSmoothieTitle.value,
@@ -36,6 +42,17 @@ const addNewSmoothie = () => {
         router.push({name : 'smoothies'})
     }
     else console.log('feedback')
+}
+
+const checkSmoothieName = () => {
+    if(smoothiesData.smoothies.length){
+        for (const smoothie of smoothiesData.smoothies) {
+            if(smoothie.title === newSmoothieTitle.value){
+                console.log('feedback')
+                break
+            }
+        }
+    }
 }
 
 </script>
