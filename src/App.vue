@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import { RouterView, RouterLink } from "vue-router"
 import { appData } from './stores/data'
+import ReloadPwa from "./components/ReloadPwa.vue";
 const smoothiesData = appData()
 
 onMounted(async () => {
@@ -10,6 +11,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <ReloadPwa />
   <header>
     <div class="wrapper w-full">
       <nav class="bg-blue-600 py-4 px-6 w-full relative">
