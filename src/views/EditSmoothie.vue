@@ -25,7 +25,7 @@ onMounted(async() => {
 const newIngredient = ref('')
 const addIngredient = () => {
     if(newIngredient.value){
-        editedSmoothie.value.ingredients.push(newIngredient.value)
+        editedSmoothie.value?.ingredients.push(newIngredient.value)
         newIngredient.value = ''
     }
     else{
@@ -34,7 +34,7 @@ const addIngredient = () => {
 }
 
 const editSmoothie = () => {
-    if(editedSmoothie.value.title){
+    if(editedSmoothie.value && editedSmoothie.value.title){
         newIngredient.value ? editedSmoothie.value.ingredients.push(newIngredient.value) : null
         const newSmoothie = {
             title : editedSmoothie.value.title,
