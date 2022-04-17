@@ -25,11 +25,9 @@ const addIngredient = () => {
 }
 const addNewSmoothie = () => {
     if(newSmoothieTitle.value){
-    
         /**
-         * *check if there isn't one smoothie title the same as the new smoothie title
+         * *check if there aren't any smoothies' title the same as the new smoothie title
         */
-
         checkSmoothieName()
         newIngredient.value ? allIngredients.value.push(newIngredient.value) : null
         const newSmoothie = {
