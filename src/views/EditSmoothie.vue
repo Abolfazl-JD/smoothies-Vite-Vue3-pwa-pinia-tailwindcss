@@ -34,11 +34,10 @@ const addIngredient = () => {
 }
 
 const editSmoothie = () => {
-    if(editedSmoothie.value && editedSmoothie.value.title){
-        /**
-         * *check if there aren't any smoothies' title the same as the new smoothie title
-        */
-        checkSmoothieName()
+    /**
+    * *check if there aren't any smoothies' title the same as the new smoothie title
+    */
+    if(editedSmoothie.value?.title  && uniqueSmoothieTitle()){
         newIngredient.value ? editedSmoothie.value.ingredients.push(newIngredient.value) : null
         const newSmoothie = {
             title : editedSmoothie.value.title,
@@ -52,15 +51,17 @@ const editSmoothie = () => {
     else console.log('feedback')
 }
 
-const checkSmoothieName = () => {
+const uniqueSmoothieTitle = () => {
     if(smoothiesData.smoothies.length){
         for (const smoothie of smoothiesData.smoothies) {
-            if(smoothie.title === editedSmoothie.value?.title){
+            if(smoothie.title.toLowerCase().trim() === editedSmoothie.value?.title.toLowerCase().trim()){
                 console.log('feedback')
-                break
+                return false
             }
         }
+        return true
     }
+    return true
 }
 </script>
 
