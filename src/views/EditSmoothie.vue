@@ -54,6 +54,7 @@ const editSmoothie = () => {
 const uniqueSmoothieTitle = () => {
     if(smoothiesData.smoothies.length){
         for (const smoothie of smoothiesData.smoothies) {
+            if(smoothie.id === editedSmoothie.value?.id) continue
             if(smoothie.title.toLowerCase().trim() === editedSmoothie.value?.title.toLowerCase().trim()){
                 console.log('feedback')
                 return false
