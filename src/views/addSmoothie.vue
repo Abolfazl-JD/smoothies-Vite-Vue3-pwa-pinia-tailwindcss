@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import router from '@/router'
 import { onMounted, reactive, ref } from 'vue'
+import ToastAlert from '@/components/ToastAlert.vue'
 
 import {appData} from '../stores/data'
 const smoothiesData = appData()
@@ -20,32 +21,34 @@ const addIngredient = () => {
         newIngredient.value = ''
     }
     else{
-        console.log('feedback')
+        showFeedback("Please enter an ingridient")
     }
 }
 const addNewSmoothie = () => {
     /**
     * *check if there aren't any smoothies' title the same as the new smoothie title
     */
-    if(newSmoothieTitle.value && uniqueSmoothieTitle()){
-        newIngredient.value ? allIngredients.value.push(newIngredient.value) : null
-        const newSmoothie = {
-            title : newSmoothieTitle.value,
-            ingredients : allIngredients.value,
-            id : Date.now(),
-            name : newSmoothieTitle.value.replace(/ /g,'_')
+    if(newSmoothieTitle.value){
+        if(uniqueSmoothieTitle()){
+            newIngredient.value ? allIngredients.value.push(newIngredient.value) : null
+            const newSmoothie = {
+                title : newSmoothieTitle.value,
+                ingredients : allIngredients.value,
+                id : Date.now(),
+                name : newSmoothieTitle.value.replace(/ /g,'_')
+            }
+            smoothiesData.addSmoothie(newSmoothie)
+            router.push({name : 'smoothies'})
         }
-        smoothiesData.addSmoothie(newSmoothie)
-        router.push({name : 'smoothies'})
+        else showFeedback(`There is already a smoothie title named ${newSmoothieTitle.value}`)
     }
-    else console.log('feedback')
+    else showFeedback('Please enter the smoothie title')
 }
 
 const uniqueSmoothieTitle = () => {
     if(smoothiesData.smoothies.length){
         for (const smoothie of smoothiesData.smoothies) {
             if(smoothie.title.toLowerCase().trim() === newSmoothieTitle.value.toLowerCase().trim()){
-                console.log('feedback')
                 return false
             }
         }
@@ -54,10 +57,18 @@ const uniqueSmoothieTitle = () => {
     return true
 }
 
+const feedback = ref('')
+const showFeedback = (alertText : string) => {
+    feedback.value = alertText
+    setTimeout(() => {
+        feedback.value = ''
+    }, 3000);
+}
 </script>
 
 <template>
-    <div class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 mt-20 mx-auto">
+    <ToastAlert v-show="feedback">{{feedback}}</ToastAlert>
+    <div class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 my-20 mx-auto">
         <h2 class="text-blue-800 text-2xl text-center font-medium">Add a new smoothie recipe</h2>
         <form class="pt-3">
             <div class="relative">

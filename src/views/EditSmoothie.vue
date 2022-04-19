@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 import type { Smoothie } from '../types'
 import { indexedDb } from '../stores/indexedDB'
 import { appData } from '../stores/data'
+import ToastAlert from '@/components/ToastAlert.vue'
 
 const databaseStore = indexedDb()
 const smoothiesData = appData()
@@ -29,7 +30,7 @@ const addIngredient = () => {
         newIngredient.value = ''
     }
     else{
-        console.log('feedback')
+        showFeedback("Please enter an ingridient")
     }
 }
 
@@ -37,18 +38,22 @@ const editSmoothie = () => {
     /**
     * *check if there aren't any smoothies' title the same as the new smoothie title
     */
-    if(editedSmoothie.value?.title  && uniqueSmoothieTitle()){
-        newIngredient.value ? editedSmoothie.value.ingredients.push(newIngredient.value) : null
-        const newSmoothie = {
-            title : editedSmoothie.value.title,
-            ingredients : editedSmoothie.value.ingredients,
-            id : editedSmoothie.value.id,
-            name : editedSmoothie.value.title.replace(/ /g,'_')
+    if(editedSmoothie.value?.title){
+        if(uniqueSmoothieTitle()){
+            newIngredient.value ? editedSmoothie.value.ingredients.push(newIngredient.value) : null
+            const newSmoothie = {
+                title : editedSmoothie.value.title,
+                ingredients : editedSmoothie.value.ingredients,
+                id : editedSmoothie.value.id,
+                name : editedSmoothie.value.title.replace(/ /g,'_')
+            }
+            smoothiesData.editSmoothie(newSmoothie)
+            router.push({name : 'smoothies'})    
         }
-        smoothiesData.editSmoothie(newSmoothie)
-        router.push({name : 'smoothies'})
+        else showFeedback(`There is already a smoothie title named ${editedSmoothie.value.title}`)
+        
     }
-    else console.log('feedback')
+    else showFeedback('Please enter the smoothie title')
 }
 
 const uniqueSmoothieTitle = () => {
@@ -56,7 +61,6 @@ const uniqueSmoothieTitle = () => {
         for (const smoothie of smoothiesData.smoothies) {
             if(smoothie.id === editedSmoothie.value?.id) continue
             if(smoothie.title.toLowerCase().trim() === editedSmoothie.value?.title.toLowerCase().trim()){
-                console.log('feedback')
                 return false
             }
         }
@@ -64,12 +68,22 @@ const uniqueSmoothieTitle = () => {
     }
     return true
 }
+
+
+const feedback = ref('')
+const showFeedback = (alertText : string) => {
+    feedback.value = alertText
+    setTimeout(() => {
+        feedback.value = ''
+    }, 3000);
+}
 </script>
 
 <template>
+    <ToastAlert v-show="feedback">{{feedback}}</ToastAlert>
     <div 
     v-if="editedSmoothie"
-    class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 mt-20 mx-auto">
+    class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 my-20 mx-auto">
         <h2 class="text-blue-800 text-2xl text-center font-medium">Edit {{ editedSmoothie.title }} smoothie recipe</h2>
         <form class="pt-3">
             <div class="relative">
