@@ -40,19 +40,15 @@ const addNewSmoothie = () => {
             smoothiesData.addSmoothie(newSmoothie)
             router.push({name : 'smoothies'})
         }
-        else showFeedback(`There is already a smoothie title named ${newSmoothieTitle.value}`)
+        else showFeedback(`There is already a smoothie with ${newSmoothieTitle.value} title`)
     }
     else showFeedback('Please enter the smoothie title')
 }
 
 const uniqueSmoothieTitle = () => {
     if(smoothiesData.smoothies.length){
-        for (const smoothie of smoothiesData.smoothies) {
-            if(smoothie.title.toLowerCase().trim() === newSmoothieTitle.value.toLowerCase().trim()){
-                return false
-            }
-        }
-        return true
+        return smoothiesData.smoothies.every(smoothie => 
+        smoothie.title.toLowerCase().trim() !== newSmoothieTitle.value.toLowerCase().trim())
     }
     return true
 }
