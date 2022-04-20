@@ -63,7 +63,9 @@ const showFeedback = (alertText : string) => {
 </script>
 
 <template>
-    <ToastAlert v-show="feedback">{{feedback}}</ToastAlert>
+    <transition name="feedback">
+        <ToastAlert v-show="feedback">{{feedback}}</ToastAlert>
+    </transition>
     <div class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 my-20 mx-auto">
         <h2 class="text-blue-800 text-2xl text-center font-medium">Add a new smoothie recipe</h2>
         <form class="pt-3">
