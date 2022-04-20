@@ -50,7 +50,7 @@ const editSmoothie = () => {
             smoothiesData.editSmoothie(newSmoothie)
             router.push({name : 'smoothies'})    
         }
-        else showFeedback('This smoothie has already exist')
+        else showFeedback(`There is already a smoothie with ${editedSmoothie.value.title} title`)
         
     }
     else showFeedback('Please enter the smoothie title')
