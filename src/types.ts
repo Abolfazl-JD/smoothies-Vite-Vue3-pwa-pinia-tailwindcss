@@ -4,3 +4,6 @@ export interface Smoothie{
     id: number,
     name : string
 }
+
+
+export type doneType = () => void
