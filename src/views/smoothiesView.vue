@@ -6,15 +6,31 @@ const smoothiesData = appData()
 </script>
 
 <template>
-  <main 
+  <transition-group
+  tag="main"
+  name="list" 
   v-if="smoothiesData.smoothies.length"
-  class="xl:w-2/3 md:w-5/6 sm:w-full sm:px-5 xs:w-2/3 w-3/4 mt-20 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-8">
+  class="xl:w-2/3 md:w-5/6 sm:w-full sm:px-5 xs:w-2/3 w-3/4 mt-20 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16 sm:gap-8 relative">
     <!-- Smoothie item -->
     <SmoothieItem 
     v-for="smoothie of smoothiesData.smoothies"
     :key="smoothie.id"
     :smoothie="smoothie" />
 
-  </main>
+  </transition-group>
   <h2 v-else class="font-bold text-gray-800 text-xl text-center mt-16">whooo no smoothie to drink!</h2>
 </template>
+
+<style>
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+</style>
