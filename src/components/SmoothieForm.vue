@@ -67,7 +67,9 @@ const uniqueSmoothieTitle = () => {
         <ToastAlert v-show="feedback">{{ feedback }}</ToastAlert>
     </transition>
     <div class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 my-20 mx-auto">
-        <h2 class="text-blue-800 text-2xl text-center font-medium">**Add a new** smoothie recipe</h2>
+        <h2 class="text-blue-800 text-2xl text-center font-medium">
+            <slot name="title"></slot>
+        </h2>
         <form class="pt-3">
             <div class="relative">
                 <label for="title" class="text-gray-500 text-xs">Smoothie title:</label>
@@ -111,7 +113,9 @@ const uniqueSmoothieTitle = () => {
         <div class="form-control mt-5 w-full text-center">
             <button
             @click="addNewSmoothie" 
-            class="py-2 px-4 bg-pink-600 text-white rounded text-sm shadow-md shadow-gray-400 hover:shadow-gray-500 transition ease-out duration-200">ADD SMOOTHIE</button>
+            class="py-2 px-4 bg-pink-600 text-white rounded text-sm shadow-md shadow-gray-400 hover:shadow-gray-500 transition ease-out duration-200">
+                <slot name="submitButton"></slot>
+            </button>
         </div>
     </div>
 </template>
