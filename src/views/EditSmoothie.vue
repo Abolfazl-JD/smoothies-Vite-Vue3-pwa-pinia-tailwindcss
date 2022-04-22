@@ -9,6 +9,8 @@ import { indexedDb } from '../stores/indexedDB'
 import { appData } from '../stores/data'
 // Components
 import ToastAlert from '@/components/ToastAlert.vue'
+// Modules
+import FormInput from '@/modules/inputFormFocus'
 
 const databaseStore = indexedDb()
 const smoothiesData = appData()
@@ -16,14 +18,12 @@ const smoothiesData = appData()
 const route = useRoute();  
 const drinkName = route.params.id
 
-const firstInputForm = ref<HTMLInputElement | null>(null)
+const { firstInputForm, focusForm }  = FormInput()
 
 const editedSmoothie = ref<Smoothie | null>()
 onMounted(async() => {
     editedSmoothie.value = await databaseStore.getSingleSmoothie((drinkName as string))
-    setTimeout(() => {
-        firstInputForm.value?.focus()
-    }, 10)
+    focusForm()
 })
 
 const newIngredient = ref('')

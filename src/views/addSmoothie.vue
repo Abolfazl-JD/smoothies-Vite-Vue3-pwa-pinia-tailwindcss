@@ -9,17 +9,19 @@ import ToastAlert from '@/components/ToastAlert.vue'
 import type { doneType } from '../types'
 // Stores
 import { appData } from '../stores/data'
+// Modules
+import FormInput from '@/modules/inputFormFocus'
 
 const smoothiesData = appData()
 
-const firstInputForm = ref<HTMLInputElement | null>(null)
+const { firstInputForm, focusForm }  = FormInput()
 onMounted(() => {
-    firstInputForm.value?.focus()
+    focusForm()
 })
 
 const newSmoothieTitle = ref('')
-const newIngredient = ref('')
 const allIngredients = ref<string[]>([])
+const newIngredient = ref('')
 
 const addIngredient = () => {
     if(newIngredient.value){
