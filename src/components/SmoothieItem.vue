@@ -31,7 +31,7 @@ const props = defineProps<{
         </div>
         <!-- Edit icon -->
         <svg
-        @click="router.push({name : 'edit-smoothie', params : {id : smoothie.name }})" 
+        @click="router.push({name : 'edit-smoothie', params : {name : smoothie.name }})" 
         xmlns="http://www.w3.org/2000/svg" 
         class="h-11 md:h-12 w-11 md:w-12 p-3 text-white bg-pink-600 font-bold rounded-full absolute right-2 md:right-5 -bottom-5 cursor-pointer" 
         viewBox="0 0 20 20" 

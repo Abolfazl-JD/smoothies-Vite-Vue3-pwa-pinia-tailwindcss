@@ -21,11 +21,11 @@ export const appData = defineStore({
     },
 
     editSmoothie(drink: Smoothie) {
-      console.log(drink)
       let selectedDrink = this.smoothies.find(smooth => smooth.id === drink.id)
       if (selectedDrink) {
         selectedDrink.title = drink.title
         selectedDrink.ingredients = [...drink.ingredients]
+        selectedDrink.name = drink.name
         this.databaseStore.saveData({...selectedDrink})
       }
 

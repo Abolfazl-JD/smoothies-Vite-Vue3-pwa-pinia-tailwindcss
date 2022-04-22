@@ -8,6 +8,8 @@ import AlertFeedback from '@/modules/alertFeedback'
 import FormInput from '@/modules/inputFormFocus'
 // Stores
 import { appData } from '../stores/data'
+// Types
+import type { Smoothie } from '../types'
 
 const smoothiesData = appData()
 const { feedback, showFeedback } = AlertFeedback()
@@ -17,8 +19,23 @@ onMounted(() => {
     focusForm()
 })
 
-const newSmoothieTitle = ref('')
-const allIngredients = ref<string[]>([])
+interface PropsType {
+    title?: string,
+    ingredients?: string[],
+    id?: number,
+    name? : string,
+    editSmoothie : boolean 
+}
+
+const props = withDefaults(defineProps<PropsType>(), {
+    title : '',
+    id : Date.now(),
+    name : '',
+    ingredients : () => []
+})
+
+const smoothieTitle = ref(props.title)
+const allIngredients = ref(props.ingredients)
 const newIngredient = ref('')
 
 const addIngredient = () => {
@@ -35,16 +52,16 @@ const addNewSmoothie = () => {
     /**
     * *check if there aren't any smoothies' title the same as the new smoothie title
     */
-    if(newSmoothieTitle.value){
+    if(smoothieTitle.value){
         if(uniqueSmoothieTitle()){
             newIngredient.value ? allIngredients.value.push(newIngredient.value) : null
             const newSmoothie = {
-                title : newSmoothieTitle.value,
+                title : smoothieTitle.value,
                 ingredients : allIngredients.value,
-                id : Date.now(),
-                name : newSmoothieTitle.value.replace(/ /g,'_')
+                id : props.id,
+                name : smoothieTitle.value.replace(/ /g,'_')
             }
-            smoothiesData.addSmoothie(newSmoothie)
+            props.editSmoothie ? smoothiesData.editSmoothie(newSmoothie) :smoothiesData.addSmoothie(newSmoothie)
             router.push({name : 'smoothies'})
         }
         else showFeedback('This smoothie has already exist')
@@ -55,7 +72,9 @@ const addNewSmoothie = () => {
 const uniqueSmoothieTitle = () => {
     if(smoothiesData.smoothies.length){
         return smoothiesData.smoothies.every(smoothie => 
-        smoothie.title.toLowerCase().trim() !== newSmoothieTitle.value.toLowerCase().trim())
+        smoothie.id !== props.id ? 
+        smoothie.title.toLowerCase().trim() !== smoothieTitle.value.toLowerCase().trim() : 
+        true)
     }
     return true
 }
@@ -77,7 +96,7 @@ const uniqueSmoothieTitle = () => {
                 ref="firstInputForm" 
                 type="text" 
                 name="title"
-                v-model="newSmoothieTitle" 
+                v-model="smoothieTitle" 
                 class="w-full pt-2 pb-1 text-lg border-b-2 border-solid border-gray-600 outline-none focus:border-teal-500">
             </div>
             <div 

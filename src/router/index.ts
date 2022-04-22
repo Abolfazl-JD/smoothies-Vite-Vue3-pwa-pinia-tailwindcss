@@ -17,7 +17,7 @@ const router = createRouter({
       component: AddSmoothie,
     },
     {
-      path: "/smoothies/:id",
+      path: "/smoothies/:name",
       name: "edit-smoothie",
       component: EditSmoothie,
       props : true
