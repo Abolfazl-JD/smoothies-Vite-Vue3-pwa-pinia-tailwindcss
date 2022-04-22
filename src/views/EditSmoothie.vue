@@ -25,7 +25,7 @@ onMounted(async() => {
     v-if="editedSmoothie"
     v-bind="editedSmoothie"
     :edit-smoothie="true">
-        <template #title>Edit {{ editedSmoothie.title }} smoothie recipe</template>
+        <template #title>Edit smoothie recipe</template>
         <template #submitButton>Edit SMOOTHIE</template>
     </SmoothieForm>
 </template>

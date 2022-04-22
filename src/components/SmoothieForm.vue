@@ -71,7 +71,9 @@ const addNewSmoothie = () => {
 
 const uniqueSmoothieTitle = () => {
     if(smoothiesData.smoothies.length){
-        return smoothiesData.smoothies.every(smoothie => 
+        return smoothiesData.smoothies.every(smoothie =>
+        // If we are editing our smoothie ,  
+        // It doesn't matter if new smoothie title is the same as edited smoothie title 
         smoothie.id !== props.id ? 
         smoothie.title.toLowerCase().trim() !== smoothieTitle.value.toLowerCase().trim() : 
         true)
