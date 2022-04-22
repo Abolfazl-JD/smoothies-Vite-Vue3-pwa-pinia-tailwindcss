@@ -1,11 +1,15 @@
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue'
 import router from '@/router'
-import { onMounted, reactive, ref } from 'vue'
-import ToastAlert from '@/components/ToastAlert.vue'
-import type {doneType} from '../types'
+// Packages
 import gsap from 'gsap'
+// Components
+import ToastAlert from '@/components/ToastAlert.vue'
+// Types
+import type { doneType } from '../types'
+// Stores
+import { appData } from '../stores/data'
 
-import {appData} from '../stores/data'
 const smoothiesData = appData()
 
 const firstInputForm = ref<HTMLInputElement | null>(null)

@@ -2,11 +2,13 @@
 import { ref, onMounted } from 'vue'
 import router from '../router'
 import { useRoute } from 'vue-router'
+// Types
 import type { Smoothie } from '../types'
+// Stores
 import { indexedDb } from '../stores/indexedDB'
 import { appData } from '../stores/data'
+// Components
 import ToastAlert from '@/components/ToastAlert.vue'
-import gsap from 'gsap'
 
 const databaseStore = indexedDb()
 const smoothiesData = appData()
@@ -21,12 +23,6 @@ onMounted(async() => {
     editedSmoothie.value = await databaseStore.getSingleSmoothie((drinkName as string))
     setTimeout(() => {
         firstInputForm.value?.focus()
-        gsap.from('#editBox', {
-            duration : 0.5,
-            scale : 0,
-            opacity : 0,
-            ease : 'easeout'
-        })
     }, 10)
 })
 
@@ -43,7 +39,7 @@ const addIngredient = () => {
 
 const editSmoothie = () => {
     /**
-    * *check if there aren't any smoothies' title the same as the new smoothie title
+    * *check if there aren't any smoothies' title the same as the Edited smoothie title
     */
     if(editedSmoothie.value?.title){
         if(uniqueSmoothieTitle()){
@@ -89,7 +85,6 @@ const showFeedback = (alertText : string) => {
     </transition>
     <div 
     v-if="editedSmoothie"
-    id="editBox"
     class="shadow shadow-gray-500 lg:w-1/3 md:w-1/2 sm:w-2/3 w-3/4 py-5 px-3 my-20 mx-auto">
         <h2 class="text-blue-800 text-2xl text-center font-medium">Edit {{ editedSmoothie.title }} smoothie recipe</h2>
         <form class="pt-3">
