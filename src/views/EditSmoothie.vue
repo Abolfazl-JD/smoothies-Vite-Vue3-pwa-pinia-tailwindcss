@@ -11,9 +11,11 @@ import { appData } from '../stores/data'
 import ToastAlert from '@/components/ToastAlert.vue'
 // Modules
 import FormInput from '@/modules/inputFormFocus'
+import AlertFeedback from '@/modules/alertFeedback'
 
 const databaseStore = indexedDb()
 const smoothiesData = appData()
+const { feedback, showFeedback } = AlertFeedback()
 
 const route = useRoute();  
 const drinkName = route.params.id
@@ -67,15 +69,6 @@ const uniqueSmoothieTitle = () => {
         true)
     }
     return true
-}
-
-
-const feedback = ref('')
-const showFeedback = (alertText : string) => {
-    feedback.value = alertText
-    setTimeout(() => {
-        feedback.value = ''
-    }, 3000);
 }
 </script>
 

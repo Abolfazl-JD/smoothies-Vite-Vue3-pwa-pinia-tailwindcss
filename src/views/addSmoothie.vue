@@ -11,8 +11,10 @@ import type { doneType } from '../types'
 import { appData } from '../stores/data'
 // Modules
 import FormInput from '@/modules/inputFormFocus'
+import AlertFeedback from '@/modules/alertFeedback'
 
 const smoothiesData = appData()
+const { feedback, showFeedback } = AlertFeedback()
 
 const { firstInputForm, focusForm }  = FormInput()
 onMounted(() => {
@@ -59,14 +61,6 @@ const uniqueSmoothieTitle = () => {
         smoothie.title.toLowerCase().trim() !== newSmoothieTitle.value.toLowerCase().trim())
     }
     return true
-}
-
-const feedback = ref('')
-const showFeedback = (alertText : string) => {
-    feedback.value = alertText
-    setTimeout(() => {
-        feedback.value = ''
-    }, 3000);
 }
 
 const beforeEnterBox = (el: any) => {
