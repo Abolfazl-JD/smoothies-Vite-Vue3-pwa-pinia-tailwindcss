@@ -6,7 +6,7 @@ export default function AlertFeedback() {
         feedback.value = alertText
         setTimeout(() => {
             feedback.value = ''
-        }, 3000);
+        }, 3000)
     }
     return { feedback, showFeedback }
 }

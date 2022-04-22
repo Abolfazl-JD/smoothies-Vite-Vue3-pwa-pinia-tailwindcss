@@ -10,7 +10,7 @@ import SmoothieForm from '@/components/SmoothieForm.vue'
 
 const databaseStore = indexedDb()
 
-const route = useRoute();  
+const route = useRoute()
 const drinkName = route.params.name
 
 

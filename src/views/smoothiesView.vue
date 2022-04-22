@@ -49,11 +49,11 @@ const enterList = (el: any, done : doneType) => {
 .switch-enter-from,
 .switch-leave-to{
   opacity : 0;
-  transform: translateY(30px);
+  transform: translateY(30px)
 }
 
 .switch-enter-active,
 .switch-leave-active{
-  transition: all 0.3s ease;
+  transition: all 0.3s ease
 }
 </style>

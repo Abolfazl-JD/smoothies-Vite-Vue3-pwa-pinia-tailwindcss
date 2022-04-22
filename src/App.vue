@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted } from "vue"
 import { RouterView, RouterLink } from "vue-router"
 import { appData } from './stores/data'
-import ReloadPwa from "./components/ReloadPwa.vue";
+import ReloadPwa from "./components/ReloadPwa.vue"
 const smoothiesData = appData()
 
 onMounted(async () => {
